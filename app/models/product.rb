@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+    belongs_to :user, optional: true
+    
     # Validações para o campo name
     validates :name, presence: true, length: { minimum: 3, maximum: 100 }
   
