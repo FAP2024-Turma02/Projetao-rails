@@ -1,24 +1,32 @@
-# README
+## Projeto: Exercício de Fixação - Models em Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Objetivo
 
-Things you may want to cover:
+Este exercício tem como objetivo praticar a criação e utilização de Models no framework Rails, um dos pilares fundamentais da arquitetura MVC (Model-View-Controller). O foco será na reestruturação da classe de funcionários criada anteriormente em um projeto usando Rails, com a adição de validações usando ActiveRecord.
 
-* Ruby version
+### Tarefas
 
-* System dependencies
+1. **Criação do Model User:**
+   - Utilizar o comando `rails generate scaffold` para gerar um scaffold para o model `User`.
+   - Este User deve possuir as seguintes colunas no banco de dados:
+     - `name` (string)
+     - `document` (string)
+     - `role` (integer)
 
-* Configuration
+2. **Validações:**
+   - No model `User`, implementar as seguintes validações:
+     - `name`: Validar a presença do nome.
+     - `document`: Validar a presença e a unicidade do documento.
 
-* Database creation
+3. **Exploração Adicional:**
+   - Caso identifique outras validações que possam ser aplicadas, fique à vontade para implementá-las e destacá-las para discussão na próxima aula.
 
-* Database initialization
+4. **Desafio Extra:**
+   - Imaginar e implementar um segundo model que não seja relacionado a `User`, com campos que façam sentido para o novo model.
+   - Criar validações para os campos deste novo model.
+   - Testar as validações utilizando o Rails Console.
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Links Úteis
 
-* Deployment instructions
-
-* ...
+- [Documentação sobre ActiveRecord Validations](https://guides.rubyonrails.org/active_record_validations.html)
