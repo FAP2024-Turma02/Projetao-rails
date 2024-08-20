@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :authors
+  resources :books
   resources :departments
   resources :companies
   resources :users
