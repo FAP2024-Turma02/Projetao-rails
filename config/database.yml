@@ -6,10 +6,10 @@ default: &default
 
 development:
   <<: *default
-  database: projetao_development
+  database: postgres
   username: postgres
-  password: example
-  host: localhost
+  password: postgres
+  host: db
 
 test:
   <<: *default
