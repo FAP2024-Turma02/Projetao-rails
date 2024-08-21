@@ -1,4 +1,9 @@
 class School::Course < ApplicationRecord
   has_many :enrollments
   has_many :students, through: :enrollments
+
+  def active_students
+    # self.enrollments.active.to_ary.map(&:student)
+    students.joins(:enrollments).merge(School::Enrollment.active)
+  end
 end
