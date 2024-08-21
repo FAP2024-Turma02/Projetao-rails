@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_12_203708) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_21_184013) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alunos", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "authors", force: :cascade do |t|
     t.string "first_name"
@@ -50,6 +56,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_12_203708) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cursos", force: :cascade do |t|
+    t.string "disciplina"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.integer "floor"
@@ -57,6 +69,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_12_203708) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_departments_on_company_id"
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "aluno_id", null: false
+    t.bigint "curso_id", null: false
+    t.date "validade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aluno_id"], name: "index_enrollments_on_aluno_id"
+    t.index ["curso_id"], name: "index_enrollments_on_curso_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -100,6 +122,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_12_203708) do
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
   add_foreign_key "departments", "companies"
+  add_foreign_key "enrollments", "alunos"
+  add_foreign_key "enrollments", "cursos"
   add_foreign_key "posts", "themes"
   add_foreign_key "products", "users"
 end
