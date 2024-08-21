@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+20/08/2023
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [X] Associação N p/ N entre Aluno e Curso "Matricula"
+- [ ] A partir de uma entidade de Curso, trazer todos os alunos com matricula ativa
+- [ ] Não devemos permitir registros duplicados da relação Aluno Curso

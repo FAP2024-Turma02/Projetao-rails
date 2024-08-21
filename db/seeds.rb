@@ -1,9 +1,61 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+
+students = School::Student.create!([
+  {
+    name: "student 1",
+    email: "student1@email.com",
+    birthday: Date.new(2024, 8, 21)
+  },
+  {
+    name: "student 2",
+    email: "student2@email.com",
+    birthday: Date.new(2023, 5, 15)
+  },
+  {
+    name: "student 3",
+    email: "student3@email.com",
+    birthday: Date.new(2022, 11, 30)
+  }
+])
+
+courses = School::Course.create!([
+  {
+    name: "Mathematics 101",
+    description: "An introductory course to Mathematics.",
+    workload: 40
+  },
+  {
+    name: "Physics 101",
+    description: "An introductory course to Physics.",
+    workload: 45
+  },
+  {
+    name: "Chemistry 101",
+    description: "An introductory course to Chemistry.",
+    workload: 50
+  }
+])
+
+School::Enrollment.create!([
+  {
+    enrollment_date: Date.new(2023, 8, 21),
+    status: 0,
+    enrollment_expiry_date: Date.new(2025, 8, 21),
+    student: students[0],
+    course: courses[0]
+  },
+  {
+    enrollment_date: Date.new(2023, 8, 21),
+    status: 0,
+    enrollment_expiry_date: Date.new(2025, 8, 21),
+    student: students[1],
+    course: courses[1]
+  },
+  {
+    enrollment_date: Date.new(2023, 8, 21),
+    status: 1,
+    enrollment_expiry_date: Date.new(2022, 8, 21),
+    student: students[2],
+    course: courses[2]
+  }
+])
