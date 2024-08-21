@@ -1,11 +1,14 @@
-class CreateRecipes < ActiveRecord::Migration[7.1]
+class CreateUsers < ActiveRecord::Migration[7.1]
   def change
-    create_table :recipes do |t|
-      t.string :title, null: false
-      t.text :ingredients, null: false
-      t.text :instructions, null: false
-      t.integer :cooking_time
+    create_table :users do |t|
+      t.string :name, null: false   
+      t.string :document, null: false   
+      t.integer :role, null: false  
+
       t.timestamps
     end
+
+    add_index :users, :document, unique: true
   end
 end
+
