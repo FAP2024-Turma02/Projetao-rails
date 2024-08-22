@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_21_142549) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_22_200451) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,15 +59,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_142549) do
   end
 
   create_table "school_enrollments", force: :cascade do |t|
-    t.date "enrollment_date"
     t.integer "status"
-    t.date "enrollment_expiry_date"
+    t.date "expired_at"
     t.bigint "student_id", null: false
     t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_school_enrollments_on_course_id"
+    t.index ["student_id", "course_id"], name: "index_school_enrollments_on_student_id_and_course_id", unique: true
     t.index ["student_id"], name: "index_school_enrollments_on_student_id"
+  end
+
+  create_table "school_lessons", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.bigint "school_module_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_module_id"], name: "index_school_lessons_on_school_module_id"
+  end
+
+  create_table "school_modules", force: :cascade do |t|
+    t.string "name"
+    t.bigint "school_course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_course_id"], name: "index_school_modules_on_school_course_id"
   end
 
   create_table "school_students", force: :cascade do |t|
@@ -91,4 +108,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_142549) do
   add_foreign_key "departments", "companies"
   add_foreign_key "school_enrollments", "school_courses", column: "course_id"
   add_foreign_key "school_enrollments", "school_students", column: "student_id"
+  add_foreign_key "school_lessons", "school_modules"
+  add_foreign_key "school_modules", "school_courses"
 end
