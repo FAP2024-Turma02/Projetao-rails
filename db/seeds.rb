@@ -1,5 +1,11 @@
 # db/seeds.rb
 
+School::Comment.delete_all
+School::Enrollment.delete_all
+School::Student.delete_all
+School::Course.delete_all
+
+
 students = School::Student.create!([
   {
     name: "student 1",
@@ -36,25 +42,35 @@ courses = School::Course.create!([
   }
 ])
 
+School::Comment.create!([
+  {
+    content: "comentario 1", 
+    student: students[0],
+    commentable: courses[0]
+    },
+    {
+    content: "comentario 2", 
+    student: students[1],
+    commentable: courses[0]
+    }
+  ])
+
 School::Enrollment.create!([
   {
-    enrollment_date: Date.new(2023, 8, 21),
     status: 0,
-    enrollment_expiry_date: Date.new(2025, 8, 21),
+    expired_at: Date.new(2025, 8, 21),
     student: students[0],
     course: courses[0]
   },
   {
-    enrollment_date: Date.new(2023, 8, 21),
     status: 0,
-    enrollment_expiry_date: Date.new(2025, 8, 21),
+    expired_at: Date.new(2025, 8, 21),
     student: students[1],
     course: courses[1]
   },
   {
-    enrollment_date: Date.new(2023, 8, 21),
     status: 1,
-    enrollment_expiry_date: Date.new(2022, 8, 21),
+    expired_at: Date.new(2022, 8, 21),
     student: students[2],
     course: courses[2]
   }

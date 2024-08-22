@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_22_200451) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_22_201406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_200451) do
     t.index ["company_id"], name: "index_departments_on_company_id"
   end
 
+  create_table "school_comments", force: :cascade do |t|
+    t.integer "commentable_id"
+    t.string "commentable_type"
+    t.text "content"
+    t.bigint "student_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_school_comments_on_student_id"
+  end
+
   create_table "school_courses", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -73,18 +83,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_200451) do
   create_table "school_lessons", force: :cascade do |t|
     t.string "title"
     t.string "content"
-    t.bigint "school_module_id", null: false
+    t.bigint "module_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["school_module_id"], name: "index_school_lessons_on_school_module_id"
+    t.index ["module_id"], name: "index_school_lessons_on_module_id"
   end
 
   create_table "school_modules", force: :cascade do |t|
     t.string "name"
-    t.bigint "school_course_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["school_course_id"], name: "index_school_modules_on_school_course_id"
+    t.index ["course_id"], name: "index_school_modules_on_course_id"
   end
 
   create_table "school_students", force: :cascade do |t|
@@ -106,8 +116,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_200451) do
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
   add_foreign_key "departments", "companies"
+  add_foreign_key "school_comments", "school_students", column: "student_id"
   add_foreign_key "school_enrollments", "school_courses", column: "course_id"
   add_foreign_key "school_enrollments", "school_students", column: "student_id"
-  add_foreign_key "school_lessons", "school_modules"
-  add_foreign_key "school_modules", "school_courses"
+  add_foreign_key "school_lessons", "school_modules", column: "module_id"
+  add_foreign_key "school_modules", "school_courses", column: "course_id"
 end

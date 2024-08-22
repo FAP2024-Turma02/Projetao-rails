@@ -4,6 +4,8 @@ class School::Course < ApplicationRecord
 
   has_many :modules
 
+  has_many :comments, as: :commentable
+
   def active_students
     # self.enrollments.active.to_ary.map(&:student)
     students.joins(:enrollments).merge(School::Enrollment.active)
