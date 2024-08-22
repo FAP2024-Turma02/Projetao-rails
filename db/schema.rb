@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_21_215543) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_21_221511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_215543) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.bigint "company_id", null: false
@@ -50,11 +56,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_215543) do
     t.index ["company_id"], name: "index_departments_on_company_id"
   end
 
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "course_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.string "title", null: false
     t.text "ingredients", null: false
     t.text "instructions", null: false
     t.integer "cooking_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,4 +93,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_215543) do
   add_foreign_key "author_books", "authors"
   add_foreign_key "author_books", "books"
   add_foreign_key "departments", "companies"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "students"
 end
