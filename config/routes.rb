@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :course_modules
   resources :courses
   resources :students
   resources :authors
