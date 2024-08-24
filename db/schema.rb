@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_21_184013) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_24_130414) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "alunos", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_184013) do
   end
 
   create_table "cursos", force: :cascade do |t|
-    t.string "disciplina"
+    t.string "disciplina", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -74,9 +74,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_184013) do
   create_table "enrollments", force: :cascade do |t|
     t.bigint "aluno_id", null: false
     t.bigint "curso_id", null: false
-    t.date "validade"
+    t.date "validade", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["aluno_id", "curso_id"], name: "index_enrollments_on_aluno_id_and_curso_id", unique: true
     t.index ["aluno_id"], name: "index_enrollments_on_aluno_id"
     t.index ["curso_id"], name: "index_enrollments_on_curso_id"
   end
