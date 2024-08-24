@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_24_130414) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_24_142423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,6 +82,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_130414) do
     t.index ["curso_id"], name: "index_enrollments_on_curso_id"
   end
 
+  create_table "lessons", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "descriptive", limit: 500, null: false
+    t.bigint "modulo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["modulo_id"], name: "index_lessons_on_modulo_id"
+  end
+
+  create_table "modulos", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "curso_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curso_id"], name: "index_modulos_on_curso_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -125,6 +142,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_130414) do
   add_foreign_key "departments", "companies"
   add_foreign_key "enrollments", "alunos"
   add_foreign_key "enrollments", "cursos"
+  add_foreign_key "lessons", "modulos"
+  add_foreign_key "modulos", "cursos"
   add_foreign_key "posts", "themes"
   add_foreign_key "products", "users"
 end
