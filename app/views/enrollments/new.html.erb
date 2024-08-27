@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associar Estudante ao Curso</title>
+</head>
+<body>
+    <h1>Associar Estudante ao Curso</h1>
+    <%= form_with(model: @enrollment, url: enrollments_path, method: :post) do |form| %>
+        <label for="student_id">Estudante:</label>
+        <%= form.select :student_id, options_from_collection_for_select(@students, :id, :name), prompt: "Selecione um Estudante", required: true %>
+        
+        <label for="course_id">Curso:</label>
+        <%= form.select :course_id, options_from_collection_for_select(@courses, :id, :name), prompt: "Selecione um Curso", required: true %>
+        
+        <button type="submit">Associar</button>
+    <% end %>
+</body>
+</html>

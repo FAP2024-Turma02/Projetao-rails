@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Associação</title>
+</head>
+<body>
+    <h1>Detalhes da Associação</h1>
+    <p><strong>Estudante:</strong> <%= @enrollment.student.name %></p>
+    <p><strong>Curso:</strong> <%= @enrollment.course.name %></p>
+    <p><strong>Data da Associação:</strong> <%= @enrollment.created_at %></p>
+
+    <a href="<%= new_enrollment_path %>">Associar Outro Estudante ao Curso</a>
+</body>
+</html>

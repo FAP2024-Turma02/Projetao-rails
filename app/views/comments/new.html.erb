@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentar</title>
+</head>
+<body>
+    <h1>Adicionar Comentário</h1>
+    <%= form_with model: @comment, url: comments_path, local: true do |form| %>
+        <label for="commentable_type">Comentável:</label>
+        <%= form.select :commentable_type, options_for_select([['Curso', 'Course'], ['Módulo', 'CourseModule'], ['Aula', 'Lesson']]), prompt: 'Selecione um tipo' %>
+        
+        <label for="commentable_id">ID do Comentável:</label>
+        <%= form.text_field :commentable_id, required: true %>
+        
+        <label for="student_id">Estudante:</label>
+        <%= form.select :student_id, options_from_collection_for_select(@students, 'id', 'name'), prompt: 'Selecione um estudante', required: true %>
+        
+        <label for="content">Comentário:</label>
+        <%= form.text_area :content, required: true %>
+        
+        <%= form.submit 'Adicionar Comentário' %>
+    <% end %>
+    
+    <%= link_to 'Voltar para Home', root_path %>
+</body>
+</html>

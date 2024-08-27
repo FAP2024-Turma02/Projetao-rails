@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .card {
+            border: none;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffeec9; /* Cor de fundo do cartão */
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+        .comments {
+            margin-top: 20px;
+        }
+        .comment {
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        .comment p {
+            margin: 5px 0;
+        }
+        .comment strong {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Cursos</h1>
+
+        <% @courses.each do |course| %>
+            <div class="card">
+                <h2><%= course.name %></h2>
+
+                <div class="comments">
+                    <% if course.comments.any? %>
+                        <h3>Comentários:</h3>
+                        <% course.comments.each do |comment| %>
+                            <div class="comment">
+                                <p><strong>Comentário:</strong> <%= comment.content %></p>
+                                <p><strong>Estudante:</strong> <%= comment.student.name %> (ID: <%= comment.student.id %>)</p>
+                            </div>
+                        <% end %>
+                    <% else %>
+                        <p>Sem comentários ainda.</p>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+
+        <%= link_to 'Voltar para Home', root_path, class: 'button' %>
+    </div>
+</body>
+</html>
