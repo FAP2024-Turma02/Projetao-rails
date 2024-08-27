@@ -1,5 +1,6 @@
 class School::Module < ApplicationRecord
+  include Commentable
+  
   belongs_to :course
   has_many :school_lessons
-  has_many :comments, as: :commentable
 end

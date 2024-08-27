@@ -1,10 +1,9 @@
 class School::Course < ApplicationRecord
+  include Commentable
+
   has_many :enrollments
   has_many :students, through: :enrollments
-
   has_many :modules
-
-  has_many :comments, as: :commentable
 
   def active_students
     # self.enrollments.active.to_ary.map(&:student)
