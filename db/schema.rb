@@ -25,6 +25,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_114042) do
     t.index ["student_id"], name: "index_comments_on_student_id"
   end
 
+  create_table "course_modules", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -45,12 +51,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_114042) do
   create_table "lessons", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "modules", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
